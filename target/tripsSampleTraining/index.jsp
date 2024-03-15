@@ -19,7 +19,7 @@
 		TripsDao tripsDao = new TripsDao();
 		int minDuration = 331;
 		int maxDuration = 9999;
-		listTrips = tripsDao.getByDuration(minDuration, maxDuration);
+		//listTrips = tripsDao.getByDuration(minDuration, maxDuration);
 	
 		for(trips trip : listTrips){
 			int i = 1;
@@ -59,11 +59,8 @@
 		if(onlyTrip != null){
 		
 	%>
-	
-	
-	
+
 	<p><%= onlyTrip.getBikeId() %></p>
-	
 	<p><%= onlyTrip.getStartTime() %></p>
 	<p><%= onlyTrip.getStopTime() %></p>
 	<p><%= onlyTrip.getUserType() %></p>

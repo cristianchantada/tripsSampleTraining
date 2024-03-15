@@ -15,13 +15,16 @@ import org.bson.conversions.Bson;
 import org.bson.Document;
 import org.bson.types.ObjectId;
 import static com.mongodb.client.model.Filters.*;
-import tripsSampleTraining.*;
+
 import com.mongodb.MongoClientSettings;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
+
+import tripsSampleTraining.*;
+
 
 import static org.bson.codecs.configuration.CodecRegistries.*;
 
@@ -36,7 +39,7 @@ public class TripsDao implements DaoInterface<trips> {
 	
 	public TripsDao(){
 		conn = this.getConnection();
-		database = conn.getDatabase("sample_mflix").withCodecRegistry(pojoCodecRegistry);
+		database = conn.getDatabase("sample_training").withCodecRegistry(pojoCodecRegistry);
 		collection = database.getCollection("trips", trips.class);
 	}
 	
@@ -49,13 +52,16 @@ public class TripsDao implements DaoInterface<trips> {
 
 	
 	public List<trips> getByDuration(int minDuration, int maxDuration) {
-		List<trips> tripsList = collection.find(Filters.gte("tripduration", minDuration)).into(new ArrayList<trips>());
+
+		//List<trips> tripsList = collection.find(Filters.gte("tripduration", minDuration)).into(new ArrayList<trips>());
 		//Bson query = Filters.and(Filters.gte("tripduration", minDuration), Filters.lte("tripduration", maxDuration));
 		//tripsList = collection.find(query).into(new ArrayList<>());
 		
 		
-		System.out.println("ENTRA EN getByDuration() del TripsDao");
-		return tripsList;
+		//System.out.println("ENTRA EN getByDuration() del TripsDao");
+		//return tripsList;
+		List<trips> duration= collection.find(Filters.gte("tripduration", minDuration)).into(new ArrayList<trips>());
+		return duration;
 	}
 	
 
@@ -72,7 +78,7 @@ public class TripsDao implements DaoInterface<trips> {
 		trips trip = new trips();
 		Bson equalComp = eq("title", t);
 		trip = collection.find(equalComp).first();
-		return null;
+		return trip;
 	}
 	
 	public trips get(String t) {
