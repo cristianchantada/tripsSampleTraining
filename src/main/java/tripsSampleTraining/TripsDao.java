@@ -1,21 +1,13 @@
 package tripsSampleTraining;
 
-import static com.mongodb.client.model.Filters.eq;
-
 import java.util.ArrayList;
 import java.util.List;
-
-import org.bson.codecs.configuration.CodecRegistries;
+import org.bson.conversions.Bson;
+import org.bson.Document;
 import org.bson.codecs.configuration.CodecRegistry;
 import org.bson.codecs.pojo.PojoCodecProvider;
-import org.bson.conversions.Bson;
-
-
-
-import org.bson.Document;
 import org.bson.types.ObjectId;
 import static com.mongodb.client.model.Filters.*;
-
 import com.mongodb.MongoClientSettings;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
@@ -23,12 +15,12 @@ import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 import com.mongodb.client.model.Filters;
 
+import static org.bson.codecs.configuration.CodecRegistries.*;
+
 import tripsSampleTraining.*;
 
 
 import static org.bson.codecs.configuration.CodecRegistries.*;
-
-
 
 public class TripsDao implements DaoInterface<trips> {
 	
@@ -45,12 +37,11 @@ public class TripsDao implements DaoInterface<trips> {
 	
 	private MongoClient getConnection() {
 		String url = "mongodb+srv://cristianchantada:cristian@cristian-instance.rrvjjrp.mongodb.net/?retryWrites=true&w=majority";
-		pojoCodecRegistry = fromRegistries(MongoClientSettings.getDefaultCodecRegistry(), fromProviders(PojoCodecProvider.builder().automatic(true).build())); 
+		pojoCodecRegistry=fromRegistries(MongoClientSettings.getDefaultCodecRegistry(),fromProviders(PojoCodecProvider.builder().automatic(true).build()));
 		MongoClient mongoClntObj = MongoClients.create(url);
 		return mongoClntObj;
 	}
 
-	
 	public List<trips> getByDuration(int minDuration, int maxDuration) {
 
 		//List<trips> tripsList = collection.find(Filters.gte("tripduration", minDuration)).into(new ArrayList<trips>());
@@ -62,6 +53,7 @@ public class TripsDao implements DaoInterface<trips> {
 		//return tripsList;
 		List<trips> duration= collection.find(Filters.gte("tripduration", minDuration)).into(new ArrayList<trips>());
 		return duration;
+		
 	}
 	
 
@@ -107,6 +99,6 @@ public class TripsDao implements DaoInterface<trips> {
 	}
 
 
-	
+
 	
 }

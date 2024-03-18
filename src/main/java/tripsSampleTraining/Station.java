@@ -5,11 +5,11 @@ import java.util.List;
 public class Station {
 	
 	private String type;
-	private List<Long> coordinates = new ArrayList<>();
+	private List<Double> coordinates = new ArrayList<>();
 	
 	public Station(){}
 	
-	public Station(String type, List<Long> coordinates) {
+	public Station(String type, List<Double> coordinates) {
 		this.type = type;
 		this.coordinates = coordinates;
 	}
@@ -18,8 +18,18 @@ public class Station {
 		return type;
 	}
 
-	public List<Long> getCoordinates() {
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public List<Double> getCoordinates() {
 		return coordinates;
 	}
+
+	public void setCoordinates(List<Double> coordinates) {
+		this.coordinates = coordinates;
+	}
+
+
 	
 }

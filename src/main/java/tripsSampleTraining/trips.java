@@ -9,25 +9,25 @@ public class trips {
 	
 	private ObjectId id;
 	@BsonProperty(value = "tripduration")
-	private int tripDuration;
+	private Integer tripDuration;
 	@BsonProperty(value="start station id")
-	private int startStationId;
+	private Integer startStationId;
 	@BsonProperty(value="start station name")
 	private String startStationName;
 	@BsonProperty(value="bikeid")
-	private int bikeId;
+	private Integer bikeId;
 	@BsonProperty(value="end station id")
-	private int endStationId;
+	private Integer endStationId;
 	@BsonProperty(value="end station name")
 	private String endStationName;
 	@BsonProperty(value="usertype")
 	private String userType;
 	@BsonProperty(value="birth year")
-	private int birthYear;
+	private Object birthYear;
 	@BsonProperty(value="start station location")
-	private Station StartStationLocation;
+	private Station startStationLocation;
 	@BsonProperty(value="end station location")
-	private Station EndStationLocation;
+	private Station endStationLocation;
 	@BsonProperty(value="start time")
 	private Date startTime;
 	@BsonProperty(value="stop time")
@@ -39,52 +39,104 @@ public class trips {
 		return id;
 	}
 
-	public int getTripDuration() {
+	public void setId(ObjectId id) {
+		this.id = id;
+	}
+
+	public Integer getTripDuration() {
 		return tripDuration;
 	}
 
-	public int getStartStationId() {
+	public void setTripDuration(Integer tripDuration) {
+		this.tripDuration = tripDuration;
+	}
+
+	public Integer getStartStationId() {
 		return startStationId;
+	}
+
+	public void setStartStationId(Integer startStationId) {
+		this.startStationId = startStationId;
 	}
 
 	public String getStartStationName() {
 		return startStationName;
 	}
 
-	public int getBikeId() {
+	public void setStartStationName(String startStationName) {
+		this.startStationName = startStationName;
+	}
+
+	public Integer getBikeId() {
 		return bikeId;
 	}
 
-	public int getEndStationId() {
+	public void setBikeId(Integer bikeId) {
+		this.bikeId = bikeId;
+	}
+
+	public Integer getEndStationId() {
 		return endStationId;
+	}
+
+	public void setEndStationId(Integer endStationId) {
+		this.endStationId = endStationId;
 	}
 
 	public String getEndStationName() {
 		return endStationName;
 	}
 
+	public void setEndStationName(String endStationName) {
+		this.endStationName = endStationName;
+	}
+
 	public String getUserType() {
 		return userType;
 	}
 
-	public int getBirthYear() {
+	public void setUserType(String userType) {
+		this.userType = userType;
+	}
+
+	public Object getBirthYear() {
 		return birthYear;
 	}
 
-	public Object getStartStationLocation() {
-		return StartStationLocation;
+	public void setBirthYear(String birthYear) {
+		this.birthYear = birthYear;
 	}
 
-	public Object getEndStationLocation() {
-		return EndStationLocation;
+	public Station getStartStationLocation() {
+		return startStationLocation;
+	}
+
+	public void setStartStationLocation(Station startStationLocation) {
+		this.startStationLocation = startStationLocation;
+	}
+
+	public Station getEndStationLocation() {
+		return endStationLocation;
+	}
+
+	public void setEndStationLocation(Station endStationLocation) {
+		this.endStationLocation = endStationLocation;
 	}
 
 	public Date getStartTime() {
 		return startTime;
 	}
 
+	public void setStartTime(Date startTime) {
+		this.startTime = startTime;
+	}
+
 	public Date getStopTime() {
 		return stopTime;
+	}
+
+	public void setStopTime(Date stopTime) {
+		this.stopTime = stopTime;
 	}
 
 }
