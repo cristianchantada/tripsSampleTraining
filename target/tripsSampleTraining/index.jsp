@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="tripsSampleTraining.*"%>
+<%@ page import="sales.*"%>
 <%@ page import="java.util.List"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="java.lang.reflect.*" %>
@@ -8,65 +8,74 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Seleccionar viajes por duración</title>
+<link rel="stylesheet" href="./styles/style.css">
+<title>Seleccionar tiendas</title>
 </head>
 <body>
-	<h2>Viajes con duración superior a 331 minutos</h2>
-	<%
-	
-		List<trips> listTrips = new ArrayList<>();
-		TripsDao tripsDao = new TripsDao();
-		int minDuration = 331;
-		int maxDuration = 9999;
-		
-		listTrips = tripsDao.getByDuration(minDuration, maxDuration);
 
-	    int i = 1;
-	    for (trips trip : listTrips) {
-	        Station startStationLocation = (Station) trip.getStartStationLocation();
-	        Station endStationLocation = (Station) trip.getEndStationLocation();
+	<% 
+
+	Store storeSeattle = new Store();
+	SalesDao salesDao = new SalesDao();
+	
+	ArrayList<Store> salesListInSeattle = new ArrayList<>();
+	salesListInSeattle = salesDao.searchStoresByLocation("Seattle");
+	
+	
+	ArrayList<Store> salesListDenverInStore = new ArrayList<>();
+	salesListDenverInStore = salesDao.searchStoresByLocationAndPurchaseMethod ("Denver", "In store" );
+
 	%>
-	    <h3>Viaje número <%= i++ %>.</h3>
-	    <ul>
-	        <li><strong>Id de la bicicleta: </strong><%= trip.getBikeId() %></li>
-	        <li><strong>Duración del viaje: </strong><%= trip.getTripDuration() %></li>
-	        <li><strong>Hora de inicio: </strong><%= trip.getStartTime() %></li>
-	        <li><strong>Hora de parada: </strong><%= trip.getStopTime() %></li>
-	        <li><strong>Tipo de usuario: </strong><%= trip.getUserType() %></li>        
-	        <li><strong>Tipo de usuario: </strong><%= trip.getBirthYear() %></li>
-	        <br>
-	        <li><strong>Estación de salida: </strong><%= trip.getStartStationName() %></li>
-	        <li><strong>Tipo: </strong><%= startStationLocation.getType() %></li>
-
-	        <% if (!startStationLocation.getCoordinates().isEmpty()) { %>
-	            <li><strong>Longitud: </strong><%= startStationLocation.getCoordinates().get(0) %></li>
-	        <% } else { %>
-	            <li><strong>Longitud: </strong> desconocida </li>
-	        <% } %>
-	        <% if (startStationLocation.getCoordinates().size() > 1) { %>
-	            <li><strong>Latitud: </strong><%= startStationLocation.getCoordinates().get(1) %></li>
-	        <% } else { %>
-	            <li><strong>Latitud: </strong> desconocida </li>
-	        <% } %>
-	        <br>
-	        <li><strong>Estación de llegada: </strong><%= trip.getEndStationName() %></li>
-	        <li><strong>Tipo: </strong><%= endStationLocation.getType() %></li>
-	        <% if (!endStationLocation.getCoordinates().isEmpty()) { %>
-	            <li><strong>Longitud: </strong><%= endStationLocation.getCoordinates().get(0) %></li>
-	        <% } else { %>
-	            <li><strong>Longitud: </strong> desconocida </li>
-	        <% } %>
-	        <% if (endStationLocation.getCoordinates().size() > 1) { %>
-	            <li><strong>Latitud: </strong><%= endStationLocation.getCoordinates().get(1) %></li>
-	        <% } else { %>
-	            <li><strong>Latitud: </strong> desconocida </li>
-	        <% } %>
-	    </ul>
+		<h2>Tiendas de Seattle</h2>
+		<table>
+			<thead>
+				<tr>
+					<th>Número de tienda</th>
+					<th>Ciudad</th>
+					<th>Método de compra</th>
+				</tr>
+			</thead>
+		<tbody>
 	<%
-	    }
+		int i = 1;
+		for(Store store : salesListInSeattle){
+	%>		
+			<tr>
+				<td><%= i++%></td>
+				<td><%= store.getStoreLocation() %></td>
+				<td><%= store.getPurchaseMethod()%></td>
+			</tr>	
+	<% 
+		} 
+	%>	
+		</tbody>
+	</table>
+	
+	<h2>Tiendas de Denver con método de compra en tienda</h2>
+	
+	<table>
+		<thead>
+			<tr>
+				<th>Número de tienda</th>
+				<th>Ciudad</th>
+				<th>Método de compra</th>
+			</tr>
+		</thead>
+		<tbody>
+	<%
+		int j = 1;
+		for(Store store : salesListDenverInStore){
+	%>	
+		<tr>
+			<td><%= j++%></td>
+			<td><%= store.getStoreLocation() %></td>
+			<td><%= store.getPurchaseMethod()%></td>
+		</tr>
+	
+	<% 
+	} 
 	%>
-
-	
-	
+		</tbody>
+	</table>
 </body>
 </html>

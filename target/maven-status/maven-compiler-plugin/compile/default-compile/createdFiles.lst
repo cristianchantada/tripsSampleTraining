@@ -1,4 +1,10 @@
+sales\SalesDao.class
+sales\items.class
+sales\DaoInterface.class
+sales\sales.class
 tripsSampleTraining\Station.class
+sales\Store.class
 tripsSampleTraining\trips.class
+sales\customer.class
 tripsSampleTraining\DaoInterface.class
 tripsSampleTraining\TripsDao.class
